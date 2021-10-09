@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.green.shade600,
             title: Text(
               'CarrotWallet',
               style: TextStyle(
@@ -57,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.white,
                 fontSize: 15,
                 fontStyle: FontStyle.normal,
+
                 //height: 2
               ),
             ).centered(),
@@ -373,7 +374,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     image: DecorationImage(
                       image: AssetImage("assets/clipart2103643.png"),
                       colorFilter: new ColorFilter.mode(
-                          Colors.black.withOpacity(0.4), BlendMode.dstATop),
+                          Colors.black.withOpacity(1), BlendMode.dstIn),
                       fit: BoxFit.cover,
                     ),
                     color: Colors.orange.shade600,
@@ -389,20 +390,50 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: MediaQuery.of(context).size.height / 2.6,
                   width: MediaQuery.of(context).size.width,
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 10,
-                        itemBuilder: (context, index) {
-                          return Text(
-                            'BTC',
-                            style: TextStyle(
-                                fontSize: 20, color: Colors.white, height: 2),
-                          ).p4();
-                        }),
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "MY COINS",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Icon(
+                          LineIcons.plusCircle,
+                          color: Colors.white,
+                        ),
+                        ListView.separated(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            physics: ScrollPhysics(),
+                            itemBuilder: (context, index) => ListTile(),
+                            separatorBuilder: (context, index) => Divider(),
+                            itemCount: 3),
+                      ],
+                    ),
                   ),
+
+                  // child: Padding(
+                  //   padding:
+                  //       const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+
+                  //   // child: ListView.builder(
+                  //   //     physics: BouncingScrollPhysics(),
+                  //   //     shrinkWrap: true,
+                  //   //     itemCount: 10,
+                  //   //     itemBuilder: (context, index) {
+                  //   //       return Text(
+                  //   //         'BTC',
+                  //   //         style: TextStyle(
+                  //   //             fontSize: 20, color: Colors.white, height: 2),
+                  //   //       ).p4();
+                  //   //     }),
+                  // ),
                 ),
               ).p24(),
             ])
