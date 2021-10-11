@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:crypto_font_icons/crypto_font_icons.dart';
 
 void main() {
   runApp(MyApp());
@@ -50,32 +51,23 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomLeft,
-            colors: [
-              Colors.deepOrange.shade600,
-              Colors.orange,
-            ],
-          ),
-        ),
+        color: Colors.orange.shade800,
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             elevation: 0,
             centerTitle: true,
             backgroundColor: Colors.green.shade800,
-            title: Text(
+            /*title: Text(
               'CarrotWallet',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
-                fontSize: 22,
+                fontSize: 15,
               ),
-            ),
+            ),*/
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(kToolbarHeight * 2),
+              preferredSize: Size.fromHeight(kToolbarHeight),
               child: Container(
                 color: Colors.orange.shade800,
                 child: Column(
@@ -90,137 +82,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           _customContainer(
                             color: Colors.orange.shade800,
                             width: 10,
-                          ),
-                          Expanded(
-                            child: _customContainer(
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade800,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 7,
-                                    offset: Offset(0, 1),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          _customContainer(
-                            color: Colors.orange.shade800,
-                            width: 10,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _customContainer(
-                            color: Colors.orange.shade800,
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: _customContainer(
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade800,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 7,
-                                    offset: Offset(0, 1),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          _customContainer(
-                            color: Colors.orange.shade800,
-                            width: 30,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _customContainer(
-                            color: Colors.orange.shade800,
-                            width: 70,
-                          ),
-                          Expanded(
-                            child: _customContainer(
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade800,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 7,
-                                    offset: Offset(0, 1),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          _customContainer(
-                            color: Colors.orange.shade800,
-                            width: 70,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _customContainer(
-                            color: Colors.orange.shade800,
-                            width: 125,
-                          ),
-                          Expanded(
-                            child: _customContainer(
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade800,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 7,
-                                    offset: Offset(0, 1),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          _customContainer(
-                            color: Colors.orange.shade800,
-                            width: 125,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _customContainer(
-                            width: 175,
                             decoration: BoxDecoration(
-                              color: Colors.orange.shade800,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.25),
-                                  spreadRadius: 0.1,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 5),
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 70,
+                                  offset: Offset(0, 1),
                                 ),
                               ],
                             ),
@@ -233,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.5),
                                     spreadRadius: 1,
-                                    blurRadius: 7,
+                                    blurRadius: 10,
                                     offset: Offset(0, 1),
                                   ),
                                 ],
@@ -241,15 +109,219 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           _customContainer(
-                            width: 175,
+                            color: Colors.orange.shade800,
+                            width: 10,
                             decoration: BoxDecoration(
-                              color: Colors.orange.shade800,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.25),
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 70,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 20,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _customContainer(
+                            color: Colors.orange.shade800,
+                            width: 30,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 70,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: _customContainer(
+                              decoration: BoxDecoration(
+                                color: Colors.green.shade800,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          _customContainer(
+                            color: Colors.orange.shade800,
+                            width: 30,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 70,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 20,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _customContainer(
+                            color: Colors.orange.shade800,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 70,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: _customContainer(
+                              decoration: BoxDecoration(
+                                color: Colors.green.shade800,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          _customContainer(
+                            color: Colors.orange.shade800,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 70,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 20,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _customContainer(
+                            color: Colors.orange.shade800,
+                            width: 125,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 70,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: _customContainer(
+                              decoration: BoxDecoration(
+                                color: Colors.green.shade800,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.4),
+                                    spreadRadius: 1,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          _customContainer(
+                            color: Colors.orange.shade800,
+                            width: 125,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.4),
+                                  spreadRadius: 1,
+                                  blurRadius: 70,
+                                  offset: Offset(0, 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 20,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _customContainer(
+                            width: 175,
+                            color: Colors.orange.shade900,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
                                   spreadRadius: 0.1,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 5),
+                                  blurRadius: 10,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: _customContainer(
+                              decoration: BoxDecoration(
+                                color: Colors.green.shade800,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(1),
+                                    spreadRadius: 1,
+                                    blurRadius: 42,
+                                    offset: Offset(0.5, 0.5),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          _customContainer(
+                            width: 175,
+                            color: Colors.orange.shade900,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0),
+                                  spreadRadius: 1,
+                                  blurRadius: 0.5,
+                                  offset: Offset(0, 0.5),
                                 ),
                               ],
                             ),
@@ -277,7 +349,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 "Main Wallet".text.white.makeCentered(),
                 2.heightBox,
                 data
-                    ? "\$0".text.bold.xl6.white.makeCentered()
+                    ? "\$12542.32".text.bold.xl6.white.makeCentered()
                     : CircularProgressIndicator().centered(),
                 HStack(
                   [
@@ -383,7 +455,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     image: DecorationImage(
                       image: AssetImage("assets/clipart2103643.png"),
                       colorFilter: new ColorFilter.mode(
-                          Colors.black.withOpacity(1), BlendMode.dstIn),
+                          Colors.black.withOpacity(0.4), BlendMode.dstIn),
                       fit: BoxFit.cover,
                     ),
                     color: Colors.orange.shade600,
@@ -425,16 +497,182 @@ class _MyHomePageState extends State<MyHomePage> {
                               ],
                             ),
                           ),
-                          Divider(),
+                          Divider(
+                            height: 5,
+                          ),
                           ListView.separated(
                             physics: BouncingScrollPhysics(),
                             separatorBuilder: (context, index) => Divider(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             itemBuilder: (context, index) => ListTile(
-                              title: Text('YIGIT'),
+                              leading: Container(
+                                child: Icon(CryptoFontIcons.BTC,
+                                    color: Colors.white),
+                              ),
+                              title: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Bitcoin',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          )),
+                                      Text(
+                                        '\$56000',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('0.005 BTC',
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      Padding(padding: EdgeInsets.only(top: 6)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('100%',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                          Icon(
+                                            LineIcons.angleUp,
+                                            color: Colors.white,
+                                            size: 17,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
-                            itemCount: 13,
+                            itemCount: 1,
+                          ),
+                          Divider(
+                            height: 5,
+                          ),
+                          ListView.separated(
+                            physics: BouncingScrollPhysics(),
+                            separatorBuilder: (context, index) => Divider(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) => ListTile(
+                              leading: Container(
+                                child: Icon(CryptoFontIcons.ETH,
+                                    color: Colors.white),
+                              ),
+                              title: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Ethereum',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          )),
+                                      Text(
+                                        '\$3000',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('3 ETH',
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      Padding(padding: EdgeInsets.only(top: 6)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('43%',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                          Icon(
+                                            LineIcons.angleUp,
+                                            color: Colors.white,
+                                            size: 17,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            itemCount: 1,
+                          ),
+                          Divider(
+                            height: 5,
+                          ),
+                          ListView.separated(
+                            physics: BouncingScrollPhysics(),
+                            separatorBuilder: (context, index) => Divider(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) => ListTile(
+                              leading: Container(
+                                child: Icon(CryptoFontIcons.DOGE,
+                                    color: Colors.white),
+                              ),
+                              title: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Doge',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          )),
+                                      Text(
+                                        '\$0.2335',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('10 DOGE',
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      Padding(padding: EdgeInsets.only(top: 6)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('4.12%',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                          Icon(
+                                            LineIcons.angleDown,
+                                            color: Colors.white,
+                                            size: 17,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            itemCount: 1,
                           ),
                         ],
                       ),
