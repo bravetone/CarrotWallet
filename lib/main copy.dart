@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> getCryptoPrice() async {
     var url = Uri.parse('https://blockchain.info/');
     final response = await http.get(url);
-    final databody = json.decode(response.body);
+    final databody = json.decode(response.body).first;
     Data data = new Data.fromJson(databody);
 
     _streamController.sink.add(data);
@@ -77,31 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
       color: decoration == null ? color : null,
       decoration: decoration != null ? decoration : null,
     );
-  }
-
-  Widget BuildCoinWidget(Data data) {
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          '${data.id}',
-          style: TextStyle(fontSize: 25),
-        ),
-        SvgPicture.network(
-          '${data.symbol}',
-          width: 150,
-          height: 150,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Text(
-          '${data.rank}',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        )
-      ],
-    ));
   }
 
   @override
@@ -568,32 +543,165 @@ class _MyHomePageState extends State<MyHomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      StreamBuilder<Data>(
-                                          stream: _streamController.stream,
-                                          builder: (context, snapdata) {
-                                            switch (snapdata.connectionState) {
-                                              case ConnectionState.waiting:
-                                                return Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                );
-                                              default:
-                                                if (snapdata.hasError) {
-                                                  return Text(
-                                                      'Please wait....');
-                                                } else {
-                                                  return BuildCoinWidget(
-                                                      snapdata.data!);
-                                                }
-                                            }
-                                          }),
+                                      Text('Bitcoin',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          )),
+                                      Text(
+                                        '\$56000',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ],
                                   ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('0.005 BTC',
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      Padding(padding: EdgeInsets.only(top: 6)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('100%',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                          Icon(
+                                            LineIcons.angleUp,
+                                            color: Colors.white,
+                                            size: 17,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
                             itemCount: 1,
                           ),
+                          /* Divider(
+                            height: 5,
+                          ),
+                          ListView.separated(
+                            physics: BouncingScrollPhysics(),
+                            separatorBuilder: (context, index) => Divider(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) => ListTile(
+                              leading: Container(
+                                child: Icon(CryptoFontIcons.ETH,
+                                    color: Colors.white),
+                              ),
+                              title: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Ethereum',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          )),
+                                      Text(
+                                        '\$3000',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('3 ETH',
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      Padding(padding: EdgeInsets.only(top: 6)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('43%',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                          Icon(
+                                            LineIcons.angleUp,
+                                            color: Colors.white,
+                                            size: 17,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            itemCount: 1,
+                          ),
+                          Divider(
+                            height: 5,
+                          ),
+                          ListView.separated(
+                            physics: BouncingScrollPhysics(),
+                            separatorBuilder: (context, index) => Divider(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) => ListTile(
+                              leading: Container(
+                                child: Icon(CryptoFontIcons.DOGE,
+                                    color: Colors.white),
+                              ),
+                              title: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Doge',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          )),
+                                      Text(
+                                        '\$0.2335',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('10 DOGE',
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      Padding(padding: EdgeInsets.only(top: 6)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('4.12%',
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                          Icon(
+                                            LineIcons.angleDown,
+                                            color: Colors.white,
+                                            size: 17,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            itemCount: 1,
+                          ),
+                        */
                         ],
                       ),
                     ),
