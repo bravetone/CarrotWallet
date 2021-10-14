@@ -10,21 +10,21 @@ class Data {
   // String priceUsd;
   // String changePercent24Hr;
   // String vwap24Hr;
-  String explorer;
+  //String explorer;
 
   Data.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         rank = json['rank'],
         symbol = json['symbol'],
-        name = json['name'],
-        // supply = json['supply'];
-        // maxSupply = json['maxSupply'];
-        // marketCapUsd = json['marketCapUsd'];
-        // volumeUsd24Hr = json['volumeUsd24Hr'];
-        // priceUsd = json['priceUsd'];
-        // changePercent24Hr = json['changePercent24Hr'];
-        // vwap24Hr = json['vwap24Hr'];
-        explorer = json['explorer'];
+        name = json['name'];
+  // supply = json['supply'];
+  // maxSupply = json['maxSupply'];
+  // marketCapUsd = json['marketCapUsd'];
+  // volumeUsd24Hr = json['volumeUsd24Hr'];
+  // priceUsd = json['priceUsd'];
+  // changePercent24Hr = json['changePercent24Hr'];
+  // vwap24Hr = json['vwap24Hr'];
+  //explorer = json['explorer'];
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -38,6 +38,6 @@ class Data {
         // data['priceUsd'] = this.priceUsd;
         // data['changePercent24Hr'] = this.changePercent24Hr;
         // data['vwap24Hr'] = this.vwap24Hr;
-        'explorer': explorer,
+        //'explorer': explorer,
       };
 }

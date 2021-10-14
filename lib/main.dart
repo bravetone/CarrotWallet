@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Data.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  StreamController<Data> _streamController = StreamController();
+  StreamController<List<Data>> _streamController = StreamController();
 
   int myAmount = 0;
 
@@ -56,15 +56,31 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 //Calling API
 
-  Future<void> getCryptoPrice() async {
-    var url = Uri.parse('https://blockchain.info/');
-    final response = await http.get(url);
-    final databody = json.decode(response.body);
-    Data data = new Data.fromJson(databody);
+  // Future<void> getCryptoPrice() async {
+  //   var url = 'https://api.coincap.io/v2/assets';
+  //   Dio dio = Dio();
+  //   var response = await dio.get(url);
 
-    _streamController.sink.add(data);
+  //   List<Data> _data = (response.data['data'] as List)
+  //       .map((e) => Data.fromJson(e as Map<String, dynamic>))
+  //       .toList();
+  //   _streamController.sink.add(_data);
+  //   //whenever data is fecthed from our link to the data,
+  //   // it will be stored in _streamController
+  // }
+
+  Future<List<Data>> getCryptoPrice() async {
+    var url = 'https://api.coincap.io/v2/assets';
+    Dio dio = Dio();
+    var response = await dio.get(url);
+
+    List<Data> _data = (response.data['data'] as List)
+        .map((e) => Data.fromJson(e as Map<String, dynamic>))
+        .toList();
+    _streamController.sink.add(_data);
     //whenever data is fecthed from our link to the data,
     // it will be stored in _streamController
+    return _data;
   }
 
   Widget _customContainer({
@@ -79,29 +95,40 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget BuildCoinWidget(Data data) {
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          '${data.id}',
-          style: TextStyle(fontSize: 25),
-        ),
-        SvgPicture.network(
-          '${data.symbol}',
-          width: 150,
-          height: 150,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Text(
-          '${data.rank}',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        )
-      ],
-    ));
+  Widget BuildCoinWidget(List<Data> data) {
+    return ListView.builder(
+      itemCount: data.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return Center(
+          child: Text(
+            '${data[index].id}',
+            style: TextStyle(fontSize: 25),
+          ),
+          //     child: Column(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Text(
+          //       '${data[index].id}',
+          //       style: TextStyle(fontSize: 25),
+          //     ),
+          //     SvgPicture.network(
+          //       '${data[index].symbol}',
+          //       width: 150,
+          //       height: 150,
+          //     ),
+          //     SizedBox(
+          //       height: 20,
+          //     ),
+          //     Text(
+          //       '${data[index].rank}',
+          //       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          //     )
+          //   ],
+          // ),
+        );
+      },
+    );
   }
 
   @override
@@ -568,8 +595,27 @@ class _MyHomePageState extends State<MyHomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      StreamBuilder<Data>(
-                                          stream: _streamController.stream,
+                                      // StreamBuilder<List<Data>>(
+                                      //     stream: _streamController.stream,
+                                      //     builder: (context, snapdata) {
+                                      //       switch (snapdata.connectionState) {
+                                      //         case ConnectionState.waiting:
+                                      //           return Center(
+                                      //             child:
+                                      //                 CircularProgressIndicator(),
+                                      //           );
+                                      //         default:
+                                      //           if (snapdata.hasError) {
+                                      //             return Text(
+                                      //                 'Please wait....');
+                                      //           } else {
+                                      //             return BuildCoinWidget(
+                                      //                 snapdata.data!);
+                                      //           }
+                                      //       }
+                                      //     }),
+                                      FutureBuilder<List<Data>>(
+                                          future: getCryptoPrice(),
                                           builder: (context, snapdata) {
                                             switch (snapdata.connectionState) {
                                               case ConnectionState.waiting:
