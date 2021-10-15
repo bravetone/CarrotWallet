@@ -63,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Data> _data = (response.data['data'] as List)
         .map((e) => Data.fromJson(e as Map<String, dynamic>))
         .toList();
+
     _streamController.sink.add(_data);
     //whenever data is fecthed from our link to the data,
     // it will be stored in _streamController
@@ -70,32 +71,31 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget BuildCoinWidget(List<Data> data) {
-    return ListView.builder(
-      itemCount: data.length,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return Center(
-          child: Column(
-            children: [
-              Text(
-                '${data[index].name}',
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '${data[index].priceUsd}'.numCurrency,
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              Text(
-                '${data[index].symbol}',
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ],
-          ),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView.builder(
+        itemCount: 3,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return Center(
+            child: Column(
+              children: [
+                Text(
+                  '${data[index].name}',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '${data[index].priceUsd}'.numCurrency + '\$',
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         MaterialButton(
-                          color: Colors.deepOrange.shade400,
+                          color: Colors.orange.shade700,
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: Icon(LineIcons.arrowCircleUp,
@@ -147,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         MaterialButton(
-                          color: Colors.deepOrange.shade400,
+                          color: Colors.orange.shade700,
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: Icon(LineIcons.arrowCircleDown,
@@ -174,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         MaterialButton(
-                          color: Colors.deepOrange.shade400,
+                          color: Colors.orange.shade700,
                           //color: Colors.white,
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
