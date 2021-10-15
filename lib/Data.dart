@@ -7,7 +7,7 @@ class Data {
   //String maxSupply;
   // String marketCapUsd;
   // String volumeUsd24Hr;
-  // String priceUsd;
+  String priceUsd;
   // String changePercent24Hr;
   // String vwap24Hr;
   //String explorer;
@@ -16,12 +16,12 @@ class Data {
       : id = json['id'],
         rank = json['rank'],
         symbol = json['symbol'],
-        name = json['name'];
-  // supply = json['supply'];
-  // maxSupply = json['maxSupply'];
-  // marketCapUsd = json['marketCapUsd'];
-  // volumeUsd24Hr = json['volumeUsd24Hr'];
-  // priceUsd = json['priceUsd'];
+        name = json['name'],
+        // supply = json['supply'];
+        // maxSupply = json['maxSupply'];
+        // marketCapUsd = json['marketCapUsd'];
+        // volumeUsd24Hr = json['volumeUsd24Hr'];
+        priceUsd = json['priceUsd'];
   // changePercent24Hr = json['changePercent24Hr'];
   // vwap24Hr = json['vwap24Hr'];
   //explorer = json['explorer'];
@@ -35,7 +35,7 @@ class Data {
         // data['maxSupply'] = this.maxSupply;
         // data['marketCapUsd'] = this.marketCapUsd;
         // data['volumeUsd24Hr'] = this.volumeUsd24Hr;
-        // data['priceUsd'] = this.priceUsd;
+        'priceUsd': priceUsd,
         // data['changePercent24Hr'] = this.changePercent24Hr;
         // data['vwap24Hr'] = this.vwap24Hr;
         //'explorer': explorer,
