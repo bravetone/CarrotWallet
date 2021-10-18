@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Data.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'appbar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,6 +33,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   StreamController<List<Data>> _streamController = StreamController();
+  late ScrollController _scrollController;
+  late ScrollController scrollController;
 
   int myAmount = 0;
 
@@ -49,10 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
-    Timer.periodic(Duration(seconds: 3), (timer) {
-      getCryptoPrice();
-    });
+    _scrollController = ScrollController();
+    // Timer.periodic(Duration(seconds: 3), (timer) {
+    getCryptoPrice();
+    // });
   }
 
   Future<List<Data>> getCryptoPrice() async {
@@ -71,27 +70,33 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget BuildCoinWidget(List<Data> data) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return Scrollbar(
+      showTrackOnHover: true,
       child: ListView.builder(
-        itemCount: 3,
+        itemCount: 10,
         shrinkWrap: true,
+        controller: _scrollController,
+        physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return Center(
-            child: Column(
-              children: [
-                Text(
-                  '${data[index].name}',
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  '${data[index].priceUsd}'.numCurrency + '\$',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ],
+          return ListTile(
+            leading: Text(
+              '#${index + 1}',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            title: Text(
+              '${data[index].name}',
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              '${data[index].priceUsd}'.numCurrency + '\$',
+              style: TextStyle(fontSize: 20, color: Colors.white),
             ),
           );
         },
@@ -109,111 +114,126 @@ class _MyHomePageState extends State<MyHomePage> {
             appBar: AppBar(),
           ),
           body: ZStack([
-            VStack([
-              VxBox(
-                      child: VStack([
-                "Main Wallet".text.bold.white.xl2.makeCentered(),
-                1.heightBox,
-                "789898".numCurrency.text.white.xl6.makeCentered(),
-                HStack(
-                  [
-                    Column(
-                      children: [
-                        MaterialButton(
-                          color: Colors.orange.shade700,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Icon(LineIcons.arrowCircleUp,
-                                color: Colors.blueGrey.shade900, size: 50),
+            VStack(
+              [
+                VxBox(
+                  child: VStack(
+                    [
+                      "Main Wallet".text.bold.white.xl2.makeCentered(),
+                      1.heightBox,
+                      "789898".numCurrency.text.white.xl6.makeCentered(),
+                      HStack(
+                        [
+                          Column(
+                            children: [
+                              MaterialButton(
+                                color: Colors.orange.shade700,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Icon(
+                                    LineIcons.arrowCircleUp,
+                                    color: Colors.blueGrey.shade900,
+                                    size: 50,
+                                  ),
+                                ),
+                                shape: CircleBorder(),
+                                splashColor: Colors.white,
+                                onPressed: () {},
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  "SEND",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1),
+                                ),
+                              ),
+                            ],
                           ),
-                          shape: CircleBorder(),
-                          splashColor: Colors.white,
-                          onPressed: () {},
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "SEND",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.bold,
-                                height: 1),
+                          Column(
+                            children: [
+                              MaterialButton(
+                                color: Colors.orange.shade700,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Icon(
+                                    LineIcons.arrowCircleDown,
+                                    color: Colors.blueGrey.shade900,
+                                    size: 50,
+                                  ),
+                                ),
+                                shape: CircleBorder(),
+                                splashColor: Colors.white,
+                                onPressed: () {},
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  "RECEIVE",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        MaterialButton(
-                          color: Colors.orange.shade700,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Icon(LineIcons.arrowCircleDown,
-                                color: Colors.blueGrey.shade900, size: 50),
+                          Column(
+                            children: [
+                              MaterialButton(
+                                color: Colors.orange.shade700,
+                                //color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Icon(
+                                    LineIcons.gift,
+                                    color: Colors.blueGrey.shade900,
+                                    size: 50,
+                                  ),
+                                ),
+                                shape: CircleBorder(),
+                                splashColor: Colors.white,
+                                onPressed: () {},
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  "BUY",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          shape: CircleBorder(),
-                          splashColor: Colors.white,
-                          onPressed: () {},
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "RECEIVE",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.bold,
-                                height: 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        MaterialButton(
-                          color: Colors.orange.shade700,
-                          //color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Icon(LineIcons.gift,
-                                color: Colors.blueGrey.shade900, size: 50),
-                          ),
-                          shape: CircleBorder(),
-                          splashColor: Colors.white,
-                          onPressed: () {},
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "BUY",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.bold,
-                                height: 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                  alignment: MainAxisAlignment.spaceAround,
-                  axisSize: MainAxisSize.max,
-                ).py24()
-              ]))
-                  .p16
-                  .blueGray900
-                  .size(context.screenWidth, context.percentHeight * 30)
-                  .alignCenter
-                  .roundedLg
-                  .shadowXl
-                  .make()
-                  .p16(),
-              5.heightBox,
-            ]),
+                        ],
+                        alignment: MainAxisAlignment.spaceAround,
+                        axisSize: MainAxisSize.max,
+                      ).py24()
+                    ],
+                  ),
+                )
+                    .p16
+                    .blueGray900
+                    .size(context.screenWidth, context.percentHeight * 30)
+                    .alignCenter
+                    .roundedLg
+                    .shadowXl
+                    .make()
+                    .p16(),
+                5.heightBox,
+              ],
+            ),
             Stack(children: [
               Container(
                 alignment: Alignment.bottomCenter,
@@ -241,48 +261,62 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: SingleChildScrollView(
+                      controller: _scrollController,
                       physics: BouncingScrollPhysics(),
                       child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(6.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "TOKENS",
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // İki row elemanını yatay olarak aynı seviyeye getirdim.
+                            children: [
+                              Text(
+                                "TOKENS",
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      DecoratedBox(
-                                        decoration: ShapeDecoration(
-                                            color: Colors.grey,
-                                            shape: CircleBorder()),
-                                      ),
-                                      Ink(
-                                        child: IconButton(
-                                          icon: Icon(LineIcons.syncIcon),
-                                          color: Colors.white,
-                                          iconSize: 40,
-                                          splashRadius: 40,
-                                          disabledColor: Colors.grey,
-                                          onPressed: () {},
-                                          tooltip: "Play",
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            ),
+                              ),
+
+                              Ink(
+                                child: IconButton(
+                                  icon: Icon(LineIcons.syncIcon),
+                                  color: Colors.white,
+                                  iconSize: 40,
+                                  splashRadius: 40,
+                                  disabledColor: Colors.grey,
+                                  onPressed: () {},
+                                  tooltip: "Play",
+                                ),
+                              ),
+
+                              //Burada Column kullanmana gerek yok tek bir widget var.
+                              // Column(
+                              //   mainAxisSize: MainAxisSize.min,
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     DecoratedBox(
+                              //       decoration: ShapeDecoration(
+                              //           color: Colors.grey,
+                              //           shape: CircleBorder()),
+                              //     ),
+                              //     Ink(
+                              //       child: IconButton(
+                              //         icon: Icon(LineIcons.syncIcon),
+                              //         color: Colors.white,
+                              //         iconSize: 40,
+                              //         splashRadius: 40,
+                              //         disabledColor: Colors.grey,
+                              //         onPressed: () {},
+                              //         tooltip: "Play",
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                            ],
                           ),
-                          Divider(),
+                          Divider(color: Colors.white),
                           FutureBuilder<List<Data>>(
                               future: getCryptoPrice(),
                               builder: (context, snapdata) {
@@ -293,30 +327,31 @@ class _MyHomePageState extends State<MyHomePage> {
                                     );
                                   default:
                                     if (snapdata.hasError) {
-                                      return Text('Please wait....');
+                                      return Center(
+                                          child: Text('Please wait....'));
                                     } else {
                                       return BuildCoinWidget(snapdata.data!);
                                     }
                                 }
                               }),
-                          ListView.separated(
-                            physics: BouncingScrollPhysics(),
-                            separatorBuilder: (context, index) => Divider(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) => ListTile(
-                              title: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            itemCount: 1,
-                          ),
+                          // ListView.separated(
+                          //   physics: BouncingScrollPhysics(),
+                          //   separatorBuilder: (context, index) => Divider(),
+                          //   scrollDirection: Axis.vertical,
+                          //   shrinkWrap: true,
+                          //   itemBuilder: (context, index) => ListTile(
+                          //     title: Column(
+                          //       children: [
+                          //         Row(
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: [],
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          //   itemCount: 1,
+                          // ),
                         ],
                       ),
                     ),

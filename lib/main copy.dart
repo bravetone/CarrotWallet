@@ -7,7 +7,6 @@ import 'package:line_icons/line_icons.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(MyApp());
